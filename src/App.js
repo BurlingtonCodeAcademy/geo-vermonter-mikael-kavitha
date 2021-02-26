@@ -7,64 +7,28 @@ import {
 } from "react-leaflet";
 import "./App.css";
 import { useState } from "react";
-//import HandleClick from "./components/scripts/GameButtons";
+import HandleClick from "./components/scripts/GameButtons";
 import Map from "./components/scripts/Map";
-import RandomStart from "./components/scripts/RandomStart"
-import Counties from './components/scripts/Counties'
-//import RandomStart from "./components/scripts/RandomStart"
+import Counties from "./components/scripts/Counties";
 import borderData from "./components/scripts/border";
+import InfoBar from "./components/scripts/InfoBar";
 import leafletPip from "leaflet-pip";
 import L from "leaflet";
-
-/*function App() {
-  const [start, setStart] = useState(true);
-  const [guess, setGuess] = useState(false);
-  const [quit, setQuit] = useState(false);
-  const [buttonState, setButtonState] = useState(false);
-  
- 
-
- 
-
-  function startClickHandler() {
-    setStart(false);
-    guessClickHandler(true);
-    quitClickHandler(true);
-    setButtonState(!buttonState);
-    RandomStart()
-    
-  }
-
-  //enables the guess click after start button is clicked
-  function guessClickHandler() {
-    setButtonState(!buttonState)
-  }
-
-  function quitClickHandler() {
-    setButtonState(!buttonState)
-  }
-
-  const [center, setCenter] = useState([43.88, -72.7317]);
-
-  return (
-    <>
-      <Map center={center} />
-      <HandleClick
-        startClickHandler={startClickHandler}
-        guessClickHandler={guessClickHandler}
-        quitClickHandler={quitClickHandler}
-        buttonState={buttonState}
-      />
-      <Counties /> 
-    </>
-  );
-}*/
+import CountyCheck from "./components/scripts/VtCountyBorder";
+// import RandomStart from './components/scripts/RandomStart'
 
 function App() {
   const [center, setCenter] = useState([43.88, -72.7317]);
   const [zoom, setZoom] = useState(8);
-  
-  function RandomStart() {
+  const [latRandom, setLatRandom] = useState()
+  const [longRandom, setLongRandom] = useState()
+
+  const [start, setStart] = useState(true);
+  const [guess, setGuess] = useState(false);
+  const [quit, setQuit] = useState(false);
+  const [buttonState, setButtonState] = useState(false);
+
+  function RandomStart(props) {
     //start by definig variables for max and min long and lat
     let layerLength = 0;
     const vtMinLat = 42.730315121762715;
@@ -95,16 +59,37 @@ function App() {
     return (
       <div>
         <Map center={center} zoom={zoom} />
-        
       </div>
     );
+  }
+  //places the map marker in a random spot as well as diables start button and enables guess and quit buttons
+  function startClickHandler() {
+    setStart(false);
+    guessClickHandler(true);
+    quitClickHandler(true);
+    setButtonState(!buttonState);
+    RandomStart();
+  }
+
+  function guessClickHandler() {
+    setButtonState(!buttonState);
+  }
+
+  function quitClickHandler() {
+    setButtonState(!buttonState);
   }
 
   return (
     <>
+      <InfoBar />
       <Map center={center} zoom={zoom} />
-    
-      <button onClick={RandomStart}>Start a Game</button>
+      <HandleClick
+        startClickHandler={startClickHandler}
+        buttonState={buttonState}
+        quitClickHandler={quitClickHandler}
+      />
+      <Counties />
+      <CountyCheck latRandom={latRandom} longRandom={longRandom} />
     </>
   );
 }

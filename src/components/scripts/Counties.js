@@ -29,7 +29,7 @@ function Counties() {
           <option value="grand isle">Grand Isle</option>
           <option value="lamoille">Lamoille</option>
           <option value="orange">Orange</option>
-          <option value="orlene">Orlenes</option>
+          <option value="orlenes">Orlenes</option>
           <option value="rutland">Rutland</option>
           <option value="washington">Washington</option>
           <option value="windham">Windham</option>
