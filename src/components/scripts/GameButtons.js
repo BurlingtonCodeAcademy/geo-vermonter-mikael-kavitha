@@ -16,3 +16,7 @@ return (
 }
 
 export default HandleClick
+
+// start,quit,guess -play buttons
+//when start is pressed-> quit and guess enabled
+// when quit/guess is pressed->start is enabled
