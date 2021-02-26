@@ -20,30 +20,37 @@ import CountyCheck from "./components/scripts/VtCountyBorder";
 function App() {
   const [center, setCenter] = useState([43.88, -72.7317]);
   const [zoom, setZoom] = useState(8);
-  const [latRandom, setLatRandom] = useState()
-  const [longRandom, setLongRandom] = useState()
+  const [latRandom, setLatRandom] = useState(43.88);
+  const [longRandom, setLongRandom] = useState(-72.7317);
 
   const [start, setStart] = useState(true);
   const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
   const [buttonState, setButtonState] = useState(false);
 
-  function RandomStart(props) {
+  function RandomStart() {
     //start by definig variables for max and min long and lat
     let layerLength = 0;
     const vtMinLat = 42.730315121762715;
     const vtMaxLat = 45.00706691759828;
     const vtMinLong = -73.42494466485307;
     const vtMaxLong = -71.510225353531;
-    let latRandom;
-    let longRandom;
+    // let latRandom;
+    // let longRandom;
     let vtBorderData = L.geoJSON(borderData);
     console.log(vtBorderData);
 
-    while (layerLength !== 1) {
-      latRandom = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
-      longRandom = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
+    let latRandGen = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
 
+    let longRandGen = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
+
+    console.log(latRandGen);
+    console.log(longRandGen);
+
+    setLatRandom(latRandGen);
+    setLongRandom(longRandGen);
+
+    while (layerLength !== 1) {
       console.log(latRandom);
       console.log(longRandom);
 
@@ -51,9 +58,12 @@ function App() {
         [longRandom, latRandom],
         vtBorderData
       ).length;
+      setLatRandom(latRandGen);
+      setLongRandom(longRandGen);
       console.log(layerLength);
     }
     setCenter([latRandom, longRandom]);
+    console.log(center);
     setZoom(18);
     console.log(zoom);
     return (
