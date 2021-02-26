@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-
+import { useState } from "react";
 
 function InfoBar() {
 
@@ -19,4 +17,4 @@ function InfoBar() {
     )
 }
 
-export default InfoBar
+export default InfoBar;
