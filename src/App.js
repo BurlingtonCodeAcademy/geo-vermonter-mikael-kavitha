@@ -29,7 +29,7 @@ function App() {
   const [buttonState, setButtonState] = useState(false);
 
   function RandomStart() {
-    //start by definig variables for max and min long and lat
+    //start by defining variables for max and min long and lat
     let layerLength = 0;
     const vtMinLat = 42.730315121762715;
     const vtMaxLat = 45.00706691759828;
@@ -58,18 +58,24 @@ function App() {
     }
     setLatRandom(latRandGen);
     setLongRandom(longRandGen);
+
     setCenter([latRandGen, longRandGen]);
 
     console.log(center);
+    console.log(setLatRandom)
+    console.log(latRandom)
     setZoom(18);
     console.log(zoom);
+    
     return (
       <div>
+        console.log('r' +center);
         <Map center={center} zoom={zoom} />
       </div>
     );
+    
   }
-  //places the map marker in a random spot as well as diables start button and enables guess and quit buttons
+  //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
     setStart(false);
     guessClickHandler(true);
@@ -86,10 +92,11 @@ function App() {
   function quitClickHandler() {
     setButtonState(!buttonState);
   }
-
+  console.log('o' +center);
   return (
     <>
       <InfoBar />
+      
       <Map center={center} zoom={zoom} />
       <HandleClick
         startClickHandler={startClickHandler}
