@@ -76,6 +76,7 @@ function App() {
     quitClickHandler(true);
     setButtonState(!buttonState);
     RandomStart();
+    
   }
 
   function guessClickHandler() {
