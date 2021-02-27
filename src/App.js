@@ -52,6 +52,8 @@ function App() {
         vtBorderData
       ).length;
 
+     
+
       //  console.log(latRandom);
       // console.log(longRandom);
       console.log(layerLength);
@@ -60,6 +62,8 @@ function App() {
     setLongRandom(longRandGen);
 
     setCenter([latRandGen, longRandGen]);
+    console.log(latRandom)
+    console.log(longRandom)
 
     console.log(center);
     console.log(setLatRandom)

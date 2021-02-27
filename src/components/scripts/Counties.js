@@ -20,24 +20,24 @@ function Counties(props) {
   return (
     <div>
       <h1>What County are we now?</h1>
-      <h1>{chosen ? `Hello you guessed ${chosen}`:`Guess the County` }</h1>
+      <h1>{chosen ? `Hello you guessed ${selected}`:`Guess the County` }</h1>
 
       <form onSubmit={SubmitCounty}>
         <select name='County Selection' value={selected} onChange={changeSelection}>
-          <option value="addison">Addison</option>
-          <option value="bennington">Bennington</option>
-          <option value="caledonia">Caledonia</option>
-          <option value="chittenden">Chittenden</option>
-          <option value="essex">Essex</option>
-          <option value="franklin">Franklin</option>
-          <option value="grand isle">Grand Isle</option>
-          <option value="lamoille">Lamoille</option>
-          <option value="orange">Orange</option>
-          <option value="orlenes">Orlenes</option>
-          <option value="rutland">Rutland</option>
-          <option value="washington">Washington</option>
-          <option value="windham">Windham</option>
-          <option value="windsor">Windsor</option>
+          <option value="Addison County">Addison</option>
+          <option value="Bennington County">Bennington</option>
+          <option value="Caledonia County">Caledonia</option>
+          <option value="Chittenden County">Chittenden</option>
+          <option value="Essex County">Essex</option>
+          <option value="Franklin County">Franklin</option>
+          <option value="Grand Isle County">Grand Isle</option>
+          <option value="Lamoille County">Lamoille</option>
+          <option value="Orange County">Orange</option>
+          <option value="Orlenes County">Orlenes</option>
+          <option value="Rutland County">Rutland</option>
+          <option value="Washington County">Washington</option>
+          <option value="Windham County">Windham</option>
+          <option value="Windsor County">Windsor</option>
         </select>
         <input type="submit" value="Guess The Spot"/>
       </form>
