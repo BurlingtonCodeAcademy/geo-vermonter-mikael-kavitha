@@ -9,7 +9,7 @@ function CountyCheck(props) {
       return false;
     } else {
       fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${props.latRandom ? props.latRandom : 43.88}&lon=${props.longRandom ? props.longRandom : -72.7317}&format=json`
+        `https://nominatim.openstreetmap.org/reverse?lat=${props.latRandom}&lon=${props.longRandom}&format=json` 
       )
         .then((res) => res.json())
         .then((jsonObj) => {
