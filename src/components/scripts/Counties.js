@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-function Counties() {
+
+function Counties(props) {
   const [chosen, setChosen] = useState(null);
   const [selected, setSelected] = useState("Select County");
 
@@ -18,8 +19,11 @@ function Counties() {
 
   return (
     <div>
+      <h1>What County are we now?</h1>
+      <h1>{chosen ? `Hello you guessed ${chosen}`:`Guess the County` }</h1>
+
       <form onSubmit={SubmitCounty}>
-        <select value={selected} onChange={changeSelection}>
+        <select name='County Selection' value={selected} onChange={changeSelection}>
           <option value="addison">Addison</option>
           <option value="bennington">Bennington</option>
           <option value="caledonia">Caledonia</option>
@@ -37,6 +41,8 @@ function Counties() {
         </select>
         <input type="submit" value="Guess The Spot"/>
       </form>
+   
+    {/*<button onClick={(evt)=>{guessClickHandler()}}>Guess</button>*/}
     </div>
   );
 }
