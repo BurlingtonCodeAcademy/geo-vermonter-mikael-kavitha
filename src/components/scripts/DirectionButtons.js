@@ -8,8 +8,7 @@ const[viewCenter,setViewCenter]=useState([43.88, -72.7317])
 const[score,setScore]=useState(100)
 let scoreChange=setScore(score-1)
 let startPosition=setCenter
-let longInput=props.long
-let latInput=props.lat
+let longInput=xx
 return(
     <>
     <button onClick={props.moveNorth}{scoreChange}>North</button>

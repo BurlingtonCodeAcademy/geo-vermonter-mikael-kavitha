@@ -35,34 +35,31 @@ function App() {
     const vtMaxLat = 45.00706691759828;
     const vtMinLong = -73.42494466485307;
     const vtMaxLong = -71.510225353531;
-    // let latRandom;
-    // let longRandom;
+    let latRandGen;
+    let longRandGen;
     let vtBorderData = L.geoJSON(borderData);
     console.log(vtBorderData);
-
-    let latRandGen = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
-
-    let longRandGen = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
-
-    console.log(latRandGen);
-    console.log(longRandGen);
-
-    setLatRandom(latRandGen);
-    setLongRandom(longRandGen);
-
     while (layerLength !== 1) {
-      console.log(latRandom);
-      console.log(longRandom);
+      latRandGen = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
+
+      longRandGen = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
+
+      console.log(latRandGen);
+      console.log(longRandGen);
 
       layerLength = leafletPip.pointInLayer(
-        [longRandom, latRandom],
+        [longRandGen, latRandGen],
         vtBorderData
       ).length;
-      setLatRandom(latRandGen);
-      setLongRandom(longRandGen);
+
+      //  console.log(latRandom);
+      // console.log(longRandom);
       console.log(layerLength);
     }
-    setCenter([latRandom, longRandom]);
+    setLatRandom(latRandGen);
+    setLongRandom(longRandGen);
+    setCenter([latRandGen, longRandGen]);
+
     console.log(center);
     setZoom(18);
     console.log(zoom);
