@@ -7,7 +7,10 @@ function CountyCheck(props) {
   useEffect(() => {
     if (data) {
       return false;
-    } else {
+    } 
+    else {
+      if(props.checkQuit)
+      {
       fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${props.latRandom}&lon=${props.longRandom}&format=json` 
       )
@@ -16,11 +19,19 @@ function CountyCheck(props) {
           console.log(jsonObj);
           setData(jsonObj);
         });
+      }
+      else {console.log ('countyyELSEprops');
+        return false
+      }
     }
   });
+  //City: {data && data.address.city} Village: {data && data.address.village} 
+  //Hamlet: {data && data.address.hamlet} 
   return (
     <p>
-      {data && data.address.city} {data && data.address.village} {data && data.address.hamlet} {data && data.address.county} {data && data.lat} {data && data.lon}
+      <div>County: {data && data.address.county}</div>
+      <div>Lat: {data && data.lat} </div>
+      <div>Lon: {data && data.lon}</div>
     </p>
   );
 }
