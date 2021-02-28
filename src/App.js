@@ -5,7 +5,7 @@ import {
   Marker,
   Polyline,
 } from "react-leaflet";
-import "./App.css";
+import "./styles/App.css";
 import { useState } from "react";
 import GameButtons from "./components/scripts/GameButtons";
 import Map from "./components/scripts/Map";
