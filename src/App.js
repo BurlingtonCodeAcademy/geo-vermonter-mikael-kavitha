@@ -15,6 +15,7 @@ import InfoBar from "./components/scripts/InfoBar";
 import leafletPip from "leaflet-pip";
 import L from "leaflet";
 import CountyCheck from "./components/scripts/VtCountyBorder";
+import DirectionButtons from "./components/scripts/DirectionButtons";
 // import RandomStart from './components/scripts/RandomStart'
 
 function App() {
@@ -22,13 +23,18 @@ function App() {
   const [zoom, setZoom] = useState(8);
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
- 
-
+  const [score, setScore] = useState(100);
   const [start, setStart] = useState(true);
   //const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
+  
   const [buttonState, setButtonState] = useState(false);
   const [guessBox, setGuessBox] = useState(false);
+
+  const [moveNorthCount, setMoveNorthCount] = useState(0)
+  const [moveSouthCount, setMoveSouthCount] = useState(0)
+  const [moveEastCount, setMoveEastCount] = useState(0)
+  const [moveWestCount, setMoveWestCount] = useState(0)
 
   function RandomStart() {
     //start by defining variables for max and min long and lat
@@ -40,6 +46,7 @@ function App() {
 
     let latRandGen;
     let longRandGen;
+
     let vtBorderData = L.geoJSON(borderData);
 
     while (layerLength !== 1) {
@@ -54,6 +61,7 @@ function App() {
         vtBorderData
       ).length;
 
+    
       console.log(layerLength);
     }
     setLatRandom(latRandGen);
@@ -87,17 +95,62 @@ function App() {
     setQuit(true);
     
   }
+ 
+   
+  function moveNorth() {
+    setMoveNorthCount(moveNorthCount + 1)
+    setLatRandom(latRandom + 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+ 
+
+  function moveSouth() {
+    setMoveSouthCount(moveSouthCount + 1)
+    setLatRandom(latRandom - 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
+ 
+  function moveEast() {
+    setMoveEastCount(moveEastCount + 1)
+    setLongRandom(longRandom + 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
+  
+  
+  function moveWest() {
+    setMoveWestCount(moveWestCount + 1);
+    setLongRandom(longRandom - 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
+  console.log(moveWestCount)
+//for some reason return buttion currently needs to be pressed twice in order to work 
+  function returnToStart() {
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
+    setCenter([latRandom, longRandom])
+    setMoveNorthCount(0)
+    setMoveSouthCount(0)
+    setMoveWestCount(0)
+    setMoveEastCount(0)
+    
+  }
+
+ 
   return (
     <>
-    {!quit && <InfoBar/>}
-   
-      {quit&& <CountyCheck
+      <CountyCheck
         checkQuit={quit}
         latRandom={latRandom}
         longRandom={longRandom}
-      />}
-      {guessBox && <Counties latRandom={latRandom}
-        longRandom={longRandom} guessBox={setGuessBox} />}
+      />
+      {guessBox && <Counties guessBox={setGuessBox} />}
       <Map center={center} zoom={zoom} />
       <GameButtons
         startClickHandler={startClickHandler}
