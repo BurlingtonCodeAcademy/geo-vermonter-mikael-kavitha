@@ -58,9 +58,6 @@ function App() {
       latRandGen = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
       longRandGen = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
 
-      console.log(latRandGen);
-      console.log(longRandGen);
-
       layerLength = leafletPip.pointInLayer(
         [longRandGen, latRandGen],
         vtBorderData
@@ -71,8 +68,6 @@ function App() {
     setLongRandom(longRandGen);
     setCenter([latRandGen, longRandGen]);
 
-    // setZoom(18);
-    console.log(zoom);
   }
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
@@ -96,8 +91,6 @@ function App() {
 
   //function that reurns player to the intial random spot, for some reason has a slight bug and needs to be pressed twice
   function returnToStart() {
-    // setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
-    // setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
     setCenter([
       latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002,
       longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,
@@ -107,7 +100,7 @@ function App() {
     setMoveWestCount(0);
     setMoveEastCount(0);
   }
-  //function to move marker north when north button is pressed, for some reason buttons must be pressed twice before the changes are made
+  //function to move marker north when north button is pressed, for some reason directional buttons must be pressed twice before the changes are made
   function moveNorth() {
     setMoveNorthCount(moveNorthCount + 1);
     setLatRandom(latRandom + 0.002);
@@ -137,14 +130,7 @@ function App() {
     setScore(score - 1);
   }
 
-  // function wrongGuess () {
-  //   setScore(score - 10)
-  // }
 
-  //console.log(moveWestCount)
-  //for some reason return button currently needs to be pressed twice in order to work
-
-  console.log(zoom);
   //JSX html
   return (
     //App div for CSS styling

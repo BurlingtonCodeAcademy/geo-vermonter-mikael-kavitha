@@ -13,7 +13,6 @@ function Map(props) {
     coords[1],
     coords[0],
   ]);
-  console.log(props.zoom);
   return (
     <MapContainer
       center={props.center}

@@ -15,7 +15,6 @@ function CountyCheck(props) {
         )
           .then((res) => res.json())
           .then((jsonObj) => {
-            console.log(jsonObj);
             setData(jsonObj);
           });
       } else {
