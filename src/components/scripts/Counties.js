@@ -15,8 +15,7 @@ function Counties(props) {
   const [data, setData] = useState();
   //let data
   const [buttonToggle, setToggle] = useState(true);
-
-
+const[score,setScore] = useState(props.score);
 
   console.log('fetchO ' + countyCompare)
 
@@ -42,7 +41,9 @@ function Counties(props) {
   function GuessCorrect() {
     if (countySelected !== '') {
       if (countySelected !== countyCompare) { 
-        setToggle(false)
+        
+      setScore(score-10)
+     // setToggle(false)
         alert('Guess Wrong') }
       else {
         setToggle(false)
@@ -72,11 +73,14 @@ function RealCountyFetch(){
       console.log('fetchInside ' + countyCompare)
       //return true;
   }
-
+console.log(score)
   return (
 
     <>
-    {!buttonToggle && <InfoBar county={countyCompare}
+    {buttonToggle 
+    && <InfoBar score={score} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
+    
+    {!buttonToggle && <InfoBar score={score} county={countyCompare}
     latitude={props.latRandom}
     longitude= {props.longRandom}/>}
 
@@ -104,7 +108,7 @@ function RealCountyFetch(){
             <option value="Windsor County">Windsor</option>
           </select>
           <input type="submit" value="Guess" />
-          <input type="submit" value="Cancel" onClick={(evt) => { props.guessBox(false) }}/>
+          <input type="submit" value="Cancel" onClick={(evt) => { props.guessBox(false) }} />
          
           </form>
           
