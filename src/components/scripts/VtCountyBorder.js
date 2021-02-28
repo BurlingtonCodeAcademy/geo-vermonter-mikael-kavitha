@@ -28,10 +28,10 @@ function CountyCheck(props) {
   //City: {data && data.address.city} Village: {data && data.address.village} 
   //Hamlet: {data && data.address.hamlet} 
   return (
-    <InfoBar 
-  
+    <InfoBar
+    score = {props.score}
     county={data && data.address.county}
-    town={data && data.address.town} 
+    town = {data && data.address.city || data && data.address.village || data && data.address.hamlet || data && data.address.town} 
     latitude={data && data.lon}
     longitude= {data && data.lon}/>
   );

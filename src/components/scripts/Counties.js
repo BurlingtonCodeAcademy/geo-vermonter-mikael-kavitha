@@ -16,7 +16,7 @@ function Counties(props) {
   //let data
   const [buttonToggle, setToggle] = useState(true);
 const[score,setScore] = useState(props.score);
-let score1
+
   console.log('fetchO ' + countyCompare)
 
   // Function
@@ -26,12 +26,15 @@ let score1
     RealCountyFetch();
     console.log('fetchChangeSel+ ' + countyCompare);
   }
+
+
   //function for selecting the counties, on submit the selected value is equal to the county chosen
   function SubmitCountyForm(evt) {
     // this makes sure the page is not refreshed once the button is triggered
     evt.preventDefault();
     RealCountyFetch()
     GuessCorrect()
+    
 
     //setChosen({countySelected});
     console.log(' countySelect' + countySelected + ' countyReal ' + countyCompare)
@@ -54,6 +57,7 @@ let score1
     } else {
       alert('Choose a county')
     }
+   
   }
   //}
   //fetching the data of the county to compare if guess is rite or wrong
@@ -74,7 +78,7 @@ function RealCountyFetch(){
       //return true;
   }
 console.log(score)
-score1=score
+
   return (
 
     <>
@@ -83,7 +87,9 @@ score1=score
     
     {!buttonToggle && <InfoBar score={score} county={countyCompare}
     latitude={props.latRandom}
-    longitude= {props.longRandom}/>}
+    longitude= {props.longRandom}
+    county={data && data.address.county}
+    town = {data && data.address.city || data && data.address.village || data && data.address.hamlet || data && data.address.town} />}
 
     <div style={{ height: '100px', width: '300px', border: '1px solid black', backgroundColor: "gray", position: "absolute", zIndex: 500 }}>
 

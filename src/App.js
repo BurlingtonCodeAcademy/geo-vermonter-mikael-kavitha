@@ -16,13 +16,13 @@ import leafletPip from "leaflet-pip";
 import L from "leaflet";
 import CountyCheck from "./components/scripts/VtCountyBorder";
 import DirectionButtons from "./components/scripts/DirectionButtons";
-// import RandomStart from './components/scripts/RandomStart'
+import NavBar from './components/scripts/NavBar'
 
 function App() {
-  let notGuess=true;
+ 
   const [center, setCenter] = useState([43.88, -72.7317]);
   const [zoom, setZoom] = useState(8);
-  
+  const[move, setMove]=useState();
   
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
@@ -32,16 +32,16 @@ function App() {
   const [start, setStart] = useState(true);
   //const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
-  
+
   const [buttonState, setButtonState] = useState(false);
   const [guessBox, setGuessBox] = useState(false);
 
-  const [moveNorthCount, setMoveNorthCount] = useState(0)
-  const [moveSouthCount, setMoveSouthCount] = useState(0)
-  const [moveEastCount, setMoveEastCount] = useState(0)
-  const [moveWestCount, setMoveWestCount] = useState(0)
+  const [moveNorthCount, setMoveNorthCount] = useState(0);
+  const [moveSouthCount, setMoveSouthCount] = useState(0);
+  const [moveEastCount, setMoveEastCount] = useState(0);
+  const [moveWestCount, setMoveWestCount] = useState(0);
 
-  const [movePath, setMovePath] = useState([[center[0], center[1]], []]);
+  
 
   function RandomStart() {
     //start by defining variables for max and min long and lat
@@ -74,99 +74,109 @@ function App() {
     setLongRandom(longRandGen);
     setCenter([latRandGen, longRandGen]);
 
-
-
-   // setZoom(18);
+    // setZoom(18);
     console.log(zoom);
   }
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
     setStart(false);
-    //  guessClickHandler(true);
-    // quitClickHandler(true);
-    setButtonState(!buttonState);
     
-    setZoom(zoom+10);
+    setButtonState(!buttonState);
+
+    setZoom(zoom + 10);
     RandomStart();
   }
 
   function guessClickHandler() {
-    setButtonState(!buttonState);
     setGuessBox(!guessBox);
-notGuess=false
+
   }
 
   function quitClickHandler() {
     setButtonState(!buttonState);
-    
-    setQuit(true)
-   
-    ;
-    
-  }
-  
-  
 
-  function moveNorth() {
-    
+    setQuit(true);
+  }
+
+ /* function moveNorth(props) {
+    props.setCenter([latRandom + 0.002, longRandom]);
+    props.setScore(props.score - 1);
     setMoveNorthCount(moveNorthCount + 1)
     setLatRandom(latRandom + 0.002);
     setCenter([latRandom, longRandom]);
-    setScore(score - 1);
-  }
- 
+    setScore(score - 1);*/
+  
 
-  function moveSouth() {
-    setMoveSouthCount(moveSouthCount + 1)
+  /*function moveSouth() {
+    setMoveSouthCount(moveSouthCount + 1);
     setLatRandom(latRandom - 0.002);
     setCenter([latRandom, longRandom]);
     setScore(score - 1);
   }
 
- 
   function moveEast() {
-    setMoveEastCount(moveEastCount + 1)
-    setLongRandom(longRandom + 0.002)
-    setCenter([latRandom, longRandom])
-    setScore(score - 1)
+    setMoveEastCount(moveEastCount + 1);
+    setLongRandom(longRandom + 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
   }
 
-  
-  
   function moveWest() {
-    setMoveWestCount(moveWestCount + 1)
-    setLongRandom(longRandom - 0.002)
-    setCenter([latRandom, longRandom])
-    setScore(score - 1)
+    setMoveWestCount(moveWestCount + 1);
+    setLongRandom(longRandom - 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
   }
+*/
+  
+
+  // function wrongGuess () {
+  //   setScore(score - 10)
+  // }
 
   //console.log(moveWestCount)
-//for some reason return button currently needs to be pressed twice in order to work 
-  function returnToStart() {
-    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002)
-    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002)
-    setCenter([latRandom, longRandom])
-    setMoveNorthCount(0)
-    setMoveSouthCount(0)
-    setMoveWestCount(0)
-    setMoveEastCount(0)
-    
-  }
+  //for some reason return button currently needs to be pressed twice in order to work
+  /*function returnToStart() {
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
+    setCenter([latRandom, longRandom]);
+    setMoveNorthCount(0);
+    setMoveSouthCount(0);
+    setMoveWestCount(0);
+    setMoveEastCount(0);
+  }*/
   console.log(zoom);
-  console.log(notGuess);
+  
   return (
-    <> 
-    {notGuess && !quit && !guessBox && 
-    <InfoBar score={score} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
-    
-      {quit && <CountyCheck
-        checkQuit={quit}
-        latRandom={latRandom}
-        longRandom={longRandom}
-      />}
-      
-      {guessBox && <Counties score={score} guessBox={setGuessBox} latRandom={latRandom}
-        longRandom={longRandom}/>}
+    <>
+      {!quit && !guessBox && (
+        <InfoBar
+          score={score}
+          county={"?"}
+          town={"?"}
+          latitude={"?"}
+          longitude={"?"}
+        />
+      )}
+
+      {quit && (
+        <CountyCheck
+        score={score}
+          checkQuit={quit}
+          latRandom={latRandom}
+          longRandom={longRandom}
+        />
+      )}
+
+      {guessBox && (
+        <Counties
+        
+          score={score}
+          guessBox={setGuessBox}
+          latRandom={latRandom}
+          longRandom={longRandom}
+        />
+      )}
 
       <Map center={center} zoom={zoom} />
       <GameButtons
@@ -176,14 +186,13 @@ notGuess=false
         guessClickHandler={guessClickHandler}
       />
       <DirectionButtons
-        moveNorth={moveNorth}
-        moveSouth={moveSouth}
-        moveEast={moveEast}
-        moveWest={moveWest}
-        returnToStart={returnToStart}
-        movePath={movePath}
-        setMovePath={setMovePath}
+       center={center}
+       setCenter={setCenter}
+       setScore={setScore}
+       score={score}
+
       />
+      <NavBar />
     </>
   );
 }
