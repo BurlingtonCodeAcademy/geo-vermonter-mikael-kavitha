@@ -43,7 +43,9 @@ function Counties(props) {
     if (countySelected !== '') {
       if (countySelected !== countyCompare) { 
         setToggle(false)
-        alert('Guess Wrong') }
+       
+        alert('Guess Wrong') 
+    }
       else {
         setToggle(false)
         alert('Guess correct')
