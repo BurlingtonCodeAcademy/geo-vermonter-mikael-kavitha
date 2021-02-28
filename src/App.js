@@ -1,4 +1,4 @@
-  import {
+import {
   MapContainer,
   TileLayer,
   Polygon,
@@ -15,6 +15,7 @@ import InfoBar from "./components/scripts/InfoBar";
 import leafletPip from "leaflet-pip";
 import L from "leaflet";
 import CountyCheck from "./components/scripts/VtCountyBorder";
+import DirectionButtons from "./components/scripts/DirectionButtons";
 // import RandomStart from './components/scripts/RandomStart'
 
 function App() {
@@ -22,12 +23,18 @@ function App() {
   const [zoom, setZoom] = useState(8);
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
-
+  const [score, setScore] = useState(100);
   const [start, setStart] = useState(true);
   const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
+  
   const [buttonState, setButtonState] = useState(false);
-  const [guessBox, setGuessBox] = useState(false)
+  const [guessBox, setGuessBox] = useState(false);
+
+  const [moveNorthCount, setMoveNorthCount] = useState(0)
+  const [moveSouthCount, setMoveSouthCount] = useState(0)
+  const [moveEastCount, setMoveEastCount] = useState(0)
+  const [moveWestCount, setMoveWestCount] = useState(0)
 
   function RandomStart() {
     //start by defining variables for max and min long and lat
@@ -38,6 +45,7 @@ function App() {
     const vtMaxLong = -71.510225353531;
     let latRandGen;
     let longRandGen;
+
     let vtBorderData = L.geoJSON(borderData);
     console.log(vtBorderData);
     while (layerLength !== 1) {
@@ -53,8 +61,6 @@ function App() {
         vtBorderData
       ).length;
 
-     
-
       //  console.log(latRandom);
       // console.log(longRandom);
       console.log(layerLength);
@@ -63,66 +69,109 @@ function App() {
     setLongRandom(longRandGen);
 
     setCenter([latRandGen, longRandGen]);
-    
 
-    console.log('ictr' +center);
-    console.log(setLatRandom)
-    console.log('ilat' +latRandom)
-    
+    console.log("ictr" + center);
+    console.log(setLatRandom);
+    console.log("ilat" + latRandom);
+
     console.log(zoom);
-   
-    
-    
   }
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
     setStart(false);
-  //  guessClickHandler(true);
-   // quitClickHandler(true);
+    //  guessClickHandler(true);
+    // quitClickHandler(true);
     setButtonState(!buttonState);
     RandomStart();
     setZoom(18);
-    
   }
 
   function guessClickHandler() {
     setButtonState(!buttonState);
-    setGuessBox(!guessBox)
-
+    setGuessBox(!guessBox);
   }
 
   function quitClickHandler() {
     setButtonState(!buttonState);
-    console.log('giveuplat'+ latRandom )
-    setQuit(true)
+    console.log("giveuplat" + latRandom);
+    setQuit(true);
   }
 
   
 
+  function moveNorth() {
+    setMoveNorthCount(moveNorthCount + 1)
+    setLatRandom(latRandom + 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+ 
 
-  console.log('octr' +center);
-  console.log('olat'+ latRandom)
-  console.log('o'+zoom);
+  function moveSouth() {
+    setMoveSouthCount(moveSouthCount + 1)
+    setLatRandom(latRandom - 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
+ 
+  function moveEast() {
+    setMoveEastCount(moveEastCount + 1)
+    setLongRandom(longRandom + 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
   
+  
+  function moveWest() {
+    setMoveWestCount(moveWestCount + 1);
+    setLongRandom(longRandom - 0.002);
+    setCenter([latRandom, longRandom]);
+    setScore(score - 1);
+  }
+
+  console.log(moveWestCount)
+//for some reason return buttion currently needs to be pressed twice in order to work 
+  function returnToStart() {
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
+    setCenter([latRandom, longRandom])
+    setMoveNorthCount(0)
+    setMoveSouthCount(0)
+    setMoveWestCount(0)
+    setMoveEastCount(0)
+    
+  }
+
+  console.log("octr" + center);
+  console.log("olat" + latRandom);
+  console.log("o" + zoom);
 
   return (
     <>
-      <CountyCheck checkQuit={quit} latRandom={latRandom} longRandom={longRandom} />
-      {guessBox && <Counties  guessBox={setGuessBox}/>}
+      <CountyCheck
+        checkQuit={quit}
+        latRandom={latRandom}
+        longRandom={longRandom}
+      />
+      {guessBox && <Counties guessBox={setGuessBox} />}
       <Map center={center} zoom={zoom} />
       <HandleClick
         startClickHandler={startClickHandler}
         buttonState={buttonState}
         quitClickHandler={quitClickHandler}
         guessClickHandler={guessClickHandler}
-      
       />
-      
-      
-      
+      <DirectionButtons
+        moveNorth={moveNorth}
+        moveSouth={moveSouth}
+        moveEast={moveEast}
+        moveWest={moveWest}
+        returnToStart={returnToStart}
+      />
     </>
   );
 }
 
 export default App;
-
