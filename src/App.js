@@ -21,8 +21,12 @@ import DirectionButtons from "./components/scripts/DirectionButtons";
 function App() {
   const [center, setCenter] = useState([43.88, -72.7317]);
   const [zoom, setZoom] = useState(8);
+  
+  
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
+  
+  
   const [score, setScore] = useState(100);
   const [start, setStart] = useState(true);
   //const [guess, setGuess] = useState(false);
@@ -35,6 +39,8 @@ function App() {
   const [moveSouthCount, setMoveSouthCount] = useState(0)
   const [moveEastCount, setMoveEastCount] = useState(0)
   const [moveWestCount, setMoveWestCount] = useState(0)
+
+  const [movePath, setMovePath] = useState([[center[0], center[1]], []]);
 
   function RandomStart() {
     //start by defining variables for max and min long and lat
@@ -61,8 +67,7 @@ function App() {
         vtBorderData
       ).length;
 
-    
-      console.log(layerLength);
+   
     }
     setLatRandom(latRandGen);
     setLongRandom(longRandGen);
@@ -101,6 +106,7 @@ function App() {
   
 
   function moveNorth() {
+    
     setMoveNorthCount(moveNorthCount + 1)
     setLatRandom(latRandom + 0.002);
     setCenter([latRandom, longRandom]);
@@ -172,6 +178,8 @@ function App() {
         moveEast={moveEast}
         moveWest={moveWest}
         returnToStart={returnToStart}
+        movePath={movePath}
+        setMovePath={setMovePath}
       />
     </>
   );
