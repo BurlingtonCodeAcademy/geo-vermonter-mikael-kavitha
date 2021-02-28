@@ -7,7 +7,7 @@
 } from "react-leaflet";
 import "./App.css";
 import { useState } from "react";
-import HandleClick from "./components/scripts/GameButtons";
+import GameButtons from "./components/scripts/GameButtons";
 import Map from "./components/scripts/Map";
 import Counties from "./components/scripts/Counties";
 import borderData from "./components/scripts/border";
@@ -54,8 +54,7 @@ function App() {
 
      
 
-      //  console.log(latRandom);
-      // console.log(longRandom);
+      
       console.log(layerLength);
     }
     setLatRandom(latRandGen);
@@ -64,9 +63,8 @@ function App() {
     setCenter([latRandGen, longRandGen]);
     
 
-    console.log('ictr' +center);
     console.log(setLatRandom)
-    console.log('ilat' +latRandom)
+    
     setZoom(18);
     console.log(zoom);
    
@@ -90,25 +88,19 @@ function App() {
 
   function quitClickHandler() {
     setButtonState(!buttonState);
-    console.log('giveuplat'+ latRandom )
+  
     setQuit(true)
   }
-
-  console.log('octr' +center);
-  console.log('olat'+ latRandom)
-  console.log('o'+zoom);
-  
-
   return (
     <>
       <CountyCheck checkQuit={quit} latRandom={latRandom} longRandom={longRandom} />
       
       <Map center={center} zoom={zoom} />
-      <HandleClick
+      <GameButtons
         startClickHandler={startClickHandler}
         buttonState={buttonState}
         quitClickHandler={quitClickHandler}
-      
+      guessClickHandler={guessClickHandler}
       />
       <Counties />
       

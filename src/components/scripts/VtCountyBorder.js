@@ -20,7 +20,7 @@ function CountyCheck(props) {
           setData(jsonObj);
         });
       }
-      else {console.log ('countyyELSEprops');
+      else {
         return false
       }
     }

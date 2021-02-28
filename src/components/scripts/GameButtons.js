@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function HandleClick({startClickHandler, guessClickHandler, quitClickHandler, buttonState}) { 
+function GameButtons({startClickHandler, guessClickHandler, quitClickHandler, buttonState}) { 
 
    
 
@@ -15,7 +15,7 @@ return (
 
 }
 
-export default HandleClick
+export default GameButtons
 
 // start,quit,guess -play buttons
 //when start is pressed-> quit and guess enabled
