@@ -14,8 +14,9 @@ function Counties(props) {
   //const [countyData, setCountyData] = useState({})
   const [data, setData] = useState();
   //let data
+  const [buttonToggle, setToggle] = useState(true);
 
-  let buttonToggle=true
+
 
   console.log('fetchO ' + countyCompare)
 
@@ -40,8 +41,11 @@ function Counties(props) {
 
   function GuessCorrect() {
     if (countySelected !== '') {
-      if (countySelected !== countyCompare) { alert('Guess Wrong') }
+      if (countySelected !== countyCompare) { 
+        setToggle(false)
+        alert('Guess Wrong') }
       else {
+        setToggle(false)
         alert('Guess correct')
         //return { Latitude: countyData && countyData.lat , Longitude: countyData && countyData.lat,
         //   Town: countyData.address.city, County: countyData.address.county }
@@ -64,15 +68,17 @@ function RealCountyFetch(){
           setData(jsonObj)
         });
      
-        countyCompare = data && data.address.county
+      countyCompare = data && data.address.county
       console.log('fetchInside ' + countyCompare)
       //return true;
-      
-    
-    
   }
 
   return (
+
+    <>
+    {!buttonToggle && <InfoBar county={countyCompare}
+    latitude={props.latRandom}
+    longitude= {props.longRandom}/>}
 
     <div style={{ height: '100px', width: '300px', border: '1px solid black', backgroundColor: "gray", position: "absolute", zIndex: 500 }}>
 
@@ -97,18 +103,23 @@ function RealCountyFetch(){
             <option value="Windham County">Windham</option>
             <option value="Windsor County">Windsor</option>
           </select>
-          <input type="submit" value="Guess" onClick={(evt)=>{buttonToggle=false}}/>
+          <input type="submit" value="Guess" />
           <input type="submit" value="Cancel" onClick={(evt) => { props.guessBox(false) }}/>
-          {!buttonToggle && <InfoBar county={countyCompare}
-    latitude={props.latRandom}
-    longitude= {props.longRandom}/>}
+         
           </form>
           
          
         
         </div>
+       
     </div>
+    </>
   )
-}
-
+  }
 export default Counties;
+
+
+/*onClick={(evt)=>{buttonToggle=false}}
+{!buttonToggle && <InfoBar county={countyCompare}
+latitude={props.latRandom}
+longitude= {props.longRandom}/>}*/

@@ -66,7 +66,6 @@ function App() {
     }
     setLatRandom(latRandGen);
     setLongRandom(longRandGen);
-
     setCenter([latRandGen, longRandGen]);
 
 
@@ -95,8 +94,9 @@ function App() {
     setQuit(true);
     
   }
- 
-   
+  
+  
+
   function moveNorth() {
     setMoveNorthCount(moveNorthCount + 1)
     setLatRandom(latRandom + 0.002);
@@ -115,25 +115,25 @@ function App() {
  
   function moveEast() {
     setMoveEastCount(moveEastCount + 1)
-    setLongRandom(longRandom + 0.002);
-    setCenter([latRandom, longRandom]);
-    setScore(score - 1);
+    setLongRandom(longRandom + 0.002)
+    setCenter([latRandom, longRandom])
+    setScore(score - 1)
   }
 
   
   
   function moveWest() {
-    setMoveWestCount(moveWestCount + 1);
-    setLongRandom(longRandom - 0.002);
-    setCenter([latRandom, longRandom]);
-    setScore(score - 1);
+    setMoveWestCount(moveWestCount + 1)
+    setLongRandom(longRandom - 0.002)
+    setCenter([latRandom, longRandom])
+    setScore(score - 1)
   }
 
   console.log(moveWestCount)
-//for some reason return buttion currently needs to be pressed twice in order to work 
+//for some reason return button currently needs to be pressed twice in order to work 
   function returnToStart() {
-    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
-    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002)
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002)
     setCenter([latRandom, longRandom])
     setMoveNorthCount(0)
     setMoveSouthCount(0)
@@ -142,21 +142,31 @@ function App() {
     
   }
 
- 
+
   return (
-    <>
-      <CountyCheck
+    <> 
+    {!quit && !guessBox && <InfoBar Score={setScore} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
+    
+      {quit && <CountyCheck
         checkQuit={quit}
         latRandom={latRandom}
         longRandom={longRandom}
-      />
-      {guessBox && <Counties guessBox={setGuessBox} />}
+      />}
+      {guessBox && <Counties guessBox={setGuessBox} latRandom={latRandom}
+        longRandom={longRandom}/>}
       <Map center={center} zoom={zoom} />
       <GameButtons
         startClickHandler={startClickHandler}
         buttonState={buttonState}
         quitClickHandler={quitClickHandler}
         guessClickHandler={guessClickHandler}
+      />
+      <DirectionButtons
+        moveNorth={moveNorth}
+        moveSouth={moveSouth}
+        moveEast={moveEast}
+        moveWest={moveWest}
+        returnToStart={returnToStart}
       />
     </>
   );

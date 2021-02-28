@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import InfoBar from './InfoBar'
 function CountyCheck(props) {
   const [data, setData] = useState();
-  //console.log('testtt')
+ 
   useEffect(() => {
     if (data) {
       return false;
@@ -28,7 +28,9 @@ function CountyCheck(props) {
   //City: {data && data.address.city} Village: {data && data.address.village} 
   //Hamlet: {data && data.address.hamlet} 
   return (
-    <InfoBar county={data && data.address.county}
+    <InfoBar 
+  
+    county={data && data.address.county}
     town={data && data.address.town} 
     latitude={data && data.lon}
     longitude= {data && data.lon}/>
