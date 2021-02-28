@@ -47,12 +47,10 @@ const[score,setScore] = useState(props.score);
   function GuessCorrect() {
     if (countySelected !== '') {
       if (countySelected !== countyCompare) { 
-       
-      
-     // setToggle(false)
-        alert('Guess Wrong')
-        wrongGuess()
-     }
+        
+      setScore(score-10)
+     setToggle(false)
+        alert('Guess Wrong') }
       else {
         setToggle(false)
         alert('Guess correct')
@@ -119,7 +117,7 @@ console.log(score)
             <option value="Windsor County">Windsor</option>
           </select>
           <input type="submit" value="Guess" />
-          <input type="submit" value="Cancel" score={score} onClick={(evt) => { props.guessBox(false)  }}  />
+          <input type="submit" value="Cancel"  onClick={(evt) => { props.guessBox(false) }} />
          
           </form>
           
