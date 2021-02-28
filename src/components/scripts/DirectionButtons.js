@@ -3,16 +3,16 @@ import { useState } from 'react'
 
 // buttons that helps player to move in different directions
 
-function DirectionButtons({buttonState}, props){
+function DirectionButtons({moveNorth, moveSouth, moveEast, moveWest, returnToStart, buttonState}){
 
 
 return(
     <>
-    <button onClick={props.moveNorth} disabled={!buttonState}>North</button>
-    <button onClick={props.moveSouth} disabled={!buttonState}>South</button>
-    <button onClick={props.moveEast} disabled={!buttonState}>East</button>
-    <button onClick={props.moveWest} disabled={!buttonState}>West</button>
-    <button onClick={props.returnToStart} disabled={!buttonState}>Return</button>
+    <button onClick={moveNorth} disabled={!buttonState}>North</button>
+    <button onClick={moveSouth} disabled={!buttonState}>South</button>
+    <button onClick={moveEast} disabled={!buttonState}>East</button>
+    <button onClick={moveWest} disabled={!buttonState}>West</button>
+    <button onClick={returnToStart} disabled={!buttonState}>Return</button>
     </>
 )
 

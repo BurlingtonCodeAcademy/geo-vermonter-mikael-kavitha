@@ -3,7 +3,7 @@ import borderData from "./border";
 
 function Map(props) {
   let vtOutline = borderData.geometry.coordinates[0].map(coords => [coords[1], coords[0]])
-
+  console.log(props.zoom);
   return (
     <MapContainer
       center={props.center}
@@ -22,6 +22,7 @@ function Map(props) {
       <Polygon
         positions={vtOutline}
         pathOptions={{ color: "orange", fillOpacity: 0 }}
+        zoom={props.zoom}
       />
     </MapContainer>
   );

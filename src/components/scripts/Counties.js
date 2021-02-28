@@ -15,8 +15,7 @@ function Counties(props) {
   const [data, setData] = useState();
   //let data
   const [buttonToggle, setToggle] = useState(true);
-
-
+const[score,setScore] = useState(props.score);
 
   console.log('fetchO ' + countyCompare)
 
@@ -27,12 +26,18 @@ function Counties(props) {
     RealCountyFetch();
     console.log('fetchChangeSel+ ' + countyCompare);
   }
+
+
+  function wrongGuess () {
+    setScore(score - 10)
+  }
   //function for selecting the counties, on submit the selected value is equal to the county chosen
   function SubmitCountyForm(evt) {
     // this makes sure the page is not refreshed once the button is triggered
     evt.preventDefault();
     RealCountyFetch()
     GuessCorrect()
+    
 
     //setChosen({countySelected});
     console.log(' countySelect' + countySelected + ' countyReal ' + countyCompare)
@@ -42,10 +47,12 @@ function Counties(props) {
   function GuessCorrect() {
     if (countySelected !== '') {
       if (countySelected !== countyCompare) { 
-        setToggle(false)
        
-        alert('Guess Wrong') 
-    }
+      
+     // setToggle(false)
+        alert('Guess Wrong')
+        wrongGuess()
+     }
       else {
         setToggle(false)
         alert('Guess correct')
@@ -55,6 +62,7 @@ function Counties(props) {
     } else {
       alert('Choose a county')
     }
+   
   }
   //}
   //fetching the data of the county to compare if guess is rite or wrong
@@ -74,13 +82,18 @@ function RealCountyFetch(){
       console.log('fetchInside ' + countyCompare)
       //return true;
   }
-
+console.log(score)
   return (
 
     <>
-    {!buttonToggle && <InfoBar county={countyCompare}
+    {buttonToggle 
+    && <InfoBar score={score} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
+    
+    {!buttonToggle && <InfoBar score={score} county={countyCompare}
     latitude={props.latRandom}
-    longitude= {props.longRandom}/>}
+    longitude= {props.longRandom}
+    county={data && data.address.county}
+    town = {data && data.address.city || data && data.address.village || data && data.address.hamlet || data && data.address.town} />}
 
     <div style={{ height: '100px', width: '300px', border: '1px solid black', backgroundColor: "gray", position: "absolute", zIndex: 500 }}>
 
@@ -106,7 +119,7 @@ function RealCountyFetch(){
             <option value="Windsor County">Windsor</option>
           </select>
           <input type="submit" value="Guess" />
-          <input type="submit" value="Cancel" onClick={(evt) => { props.guessBox(false) }}/>
+          <input type="submit" value="Cancel" score={score} onClick={(evt) => { props.guessBox(false)  }}  />
          
           </form>
           

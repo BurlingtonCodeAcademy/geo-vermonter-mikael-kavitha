@@ -67,7 +67,7 @@ function App() {
     setLongRandom(longRandGen);
     setCenter([latRandGen, longRandGen]);
 
-    setZoom(18);
+    // setZoom(18);
     console.log(zoom);
   }
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
@@ -76,12 +76,12 @@ function App() {
     //  guessClickHandler(true);
     // quitClickHandler(true);
     setButtonState(!buttonState);
+
+    setZoom(zoom + 10);
     RandomStart();
-    setZoom(18);
   }
 
   function guessClickHandler() {
-    setButtonState(!buttonState);
     setGuessBox(!guessBox);
   }
 
@@ -119,7 +119,13 @@ function App() {
     setScore(score - 1);
   }
 
-  console.log(moveWestCount);
+  
+
+  // function wrongGuess () {
+  //   setScore(score - 10)
+  // }
+
+  //console.log(moveWestCount)
   //for some reason return button currently needs to be pressed twice in order to work
   function returnToStart() {
     setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
@@ -130,12 +136,13 @@ function App() {
     setMoveWestCount(0);
     setMoveEastCount(0);
   }
+  console.log(zoom);
 
   return (
     <>
       {!quit && !guessBox && (
         <InfoBar
-          Score={setScore}
+          score={score}
           county={"?"}
           town={"?"}
           latitude={"?"}
@@ -150,14 +157,17 @@ function App() {
           longRandom={longRandom}
         />
       )}
+
       {guessBox && (
         <Counties
+        
+          score={score}
           guessBox={setGuessBox}
           latRandom={latRandom}
-          score={score}
           longRandom={longRandom}
         />
       )}
+
       <Map center={center} zoom={zoom} />
       <GameButtons
         startClickHandler={startClickHandler}
