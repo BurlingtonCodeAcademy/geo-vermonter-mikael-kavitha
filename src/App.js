@@ -1,4 +1,4 @@
-  import {
+import {
   MapContainer,
   TileLayer,
   Polygon,
@@ -22,12 +22,14 @@ function App() {
   const [zoom, setZoom] = useState(8);
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
+ 
 
   const [start, setStart] = useState(true);
-  const [guess, setGuess] = useState(false);
+  //const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
   const [buttonState, setButtonState] = useState(false);
-  
+  const [guessBox, setGuessBox] = useState(false);
+
   function RandomStart() {
     //start by defining variables for max and min long and lat
     let layerLength = 0;
@@ -35,13 +37,13 @@ function App() {
     const vtMaxLat = 45.00706691759828;
     const vtMinLong = -73.42494466485307;
     const vtMaxLong = -71.510225353531;
+
     let latRandGen;
     let longRandGen;
     let vtBorderData = L.geoJSON(borderData);
-    console.log(vtBorderData);
+
     while (layerLength !== 1) {
       latRandGen = Math.random() * (vtMaxLat - vtMinLat) + vtMinLat;
-
       longRandGen = Math.random() * (vtMaxLong - vtMinLong) + vtMinLong;
 
       console.log(latRandGen);
@@ -52,62 +54,59 @@ function App() {
         vtBorderData
       ).length;
 
-     
-
-      
       console.log(layerLength);
     }
     setLatRandom(latRandGen);
     setLongRandom(longRandGen);
 
     setCenter([latRandGen, longRandGen]);
-    
 
-    console.log(setLatRandom)
-    
+
+
     setZoom(18);
     console.log(zoom);
-   
-    
-    
   }
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
     setStart(false);
-   // guessClickHandler(true);
-   // quitClickHandler(true);
+    //  guessClickHandler(true);
+    // quitClickHandler(true);
     setButtonState(!buttonState);
     RandomStart();
-    
+    setZoom(18);
   }
 
   function guessClickHandler() {
     setButtonState(!buttonState);
-
+    setGuessBox(!guessBox);
   }
 
   function quitClickHandler() {
     setButtonState(!buttonState);
-  
-    setQuit(true)
+    
+    setQuit(true);
+    
   }
   return (
     <>
-      <CountyCheck checkQuit={quit} latRandom={latRandom} longRandom={longRandom} />
-      
+    {!quit && <InfoBar/>}
+   
+      {quit&& <CountyCheck
+        checkQuit={quit}
+        latRandom={latRandom}
+        longRandom={longRandom}
+      />}
+      {guessBox && <Counties latRandom={latRandom}
+        longRandom={longRandom} guessBox={setGuessBox} />}
       <Map center={center} zoom={zoom} />
       <GameButtons
         startClickHandler={startClickHandler}
         buttonState={buttonState}
         quitClickHandler={quitClickHandler}
-      guessClickHandler={guessClickHandler}
+        guessClickHandler={guessClickHandler}
       />
-      <Counties />
-      
-      
     </>
   );
 }
 
 export default App;
-

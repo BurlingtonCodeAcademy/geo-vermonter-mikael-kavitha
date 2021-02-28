@@ -1,19 +1,13 @@
 import { useState } from "react";
 
-function InfoBar() {
-
-    const [longitude, setLongitude] = useState('?')
-    const [latitude, setLatitude] = useState('?')
-    const [county, setCounty] = useState('?')
-    const [town, setTown] = useState('?')
-    return (
-        <>
-            <div>Longitude:{longitude}Latitude:{latitude}County:{county}Town:{town}</div>
-           
-
-
-
-        </>
+function InfoBar(props) {
+ return (
+       <div>
+      <div>County: {props.county}</div>
+      <div>Town: {props.city} {props.village} {props.hamlet} {props.town} </div>
+      <div>Latitude: {props.latitude} </div>
+      <div>Longitude: {props.longitude}</div>
+      </div>
     )
 }
 
