@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function CountyCheck(props) {
-  const [data, setData] = useState("");
+  const [data, setData] = useState();
 
   useEffect(() => {
     if (data) {
@@ -30,6 +30,7 @@ function CountyCheck(props) {
   return (
     <p>
       <div>County: {data && data.address.county}</div>
+      <div>Town: {data && data.address.city} {data && data.address.village} {data && data.address.hamlet} {data && data.address.town} </div>
       <div>Lat: {data && data.lat} </div>
       <div>Lon: {data && data.lon}</div>
     </p>

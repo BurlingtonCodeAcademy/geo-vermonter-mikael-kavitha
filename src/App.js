@@ -27,7 +27,8 @@ function App() {
   const [guess, setGuess] = useState(false);
   const [quit, setQuit] = useState(false);
   const [buttonState, setButtonState] = useState(false);
-  
+  const [guessBox, setGuessBox] = useState(false)
+
   function RandomStart() {
     //start by defining variables for max and min long and lat
     let layerLength = 0;
@@ -67,7 +68,7 @@ function App() {
     console.log('ictr' +center);
     console.log(setLatRandom)
     console.log('ilat' +latRandom)
-    setZoom(18);
+    
     console.log(zoom);
    
     
@@ -76,15 +77,17 @@ function App() {
   //places the map marker in a random spot as well as disables start button and enables guess and quit buttons
   function startClickHandler() {
     setStart(false);
-   // guessClickHandler(true);
+  //  guessClickHandler(true);
    // quitClickHandler(true);
     setButtonState(!buttonState);
     RandomStart();
+    setZoom(18);
     
   }
 
   function guessClickHandler() {
     setButtonState(!buttonState);
+    setGuessBox(!guessBox)
 
   }
 
@@ -94,6 +97,9 @@ function App() {
     setQuit(true)
   }
 
+  
+
+
   console.log('octr' +center);
   console.log('olat'+ latRandom)
   console.log('o'+zoom);
@@ -102,15 +108,16 @@ function App() {
   return (
     <>
       <CountyCheck checkQuit={quit} latRandom={latRandom} longRandom={longRandom} />
-      
+      {guessBox && <Counties  guessBox={setGuessBox}/>}
       <Map center={center} zoom={zoom} />
       <HandleClick
         startClickHandler={startClickHandler}
         buttonState={buttonState}
         quitClickHandler={quitClickHandler}
+        guessClickHandler={guessClickHandler}
       
       />
-      <Counties />
+      
       
       
     </>

@@ -18,9 +18,9 @@ function Counties(props) {
   }
 
   return (
-    <div>
-      <h1>What County are we now?</h1>
-      <h1>{chosen ? `Hello you guessed ${selected}`:`Guess the County` }</h1>
+    <div >
+      <h1>What County are we in?</h1>
+      <h1>{chosen ? `You guessed ${selected}`:`Guess the County` }</h1>
 
       <form onSubmit={SubmitCounty}>
         <select name='County Selection' value={selected} onChange={changeSelection}>
@@ -39,10 +39,12 @@ function Counties(props) {
           <option value="Windham County">Windham</option>
           <option value="Windsor County">Windsor</option>
         </select>
-        <input type="submit" value="Guess The Spot"/>
+        <input type="submit" value="Guess"/>
+        <input type="submit" value="Cancel" onClick={(evt) => {props.guessBox(false)}} /> 
+
       </form>
    
-    {/*<button onClick={(evt)=>{guessClickHandler()}}>Guess</button>*/}
+    
     </div>
   );
 }
