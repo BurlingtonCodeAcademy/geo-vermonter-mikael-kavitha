@@ -19,6 +19,7 @@ import DirectionButtons from "./components/scripts/DirectionButtons";
 // import RandomStart from './components/scripts/RandomStart'
 
 function App() {
+  let notGuess=true;
   const [center, setCenter] = useState([43.88, -72.7317]);
   const [zoom, setZoom] = useState(8);
   
@@ -92,6 +93,7 @@ function App() {
   function guessClickHandler() {
     setButtonState(!buttonState);
     setGuessBox(!guessBox);
+notGuess=false
   }
 
   function quitClickHandler() {
@@ -151,10 +153,11 @@ function App() {
     
   }
   console.log(zoom);
-
+  console.log(notGuess);
   return (
     <> 
-    {!quit && !guessBox && <InfoBar score={score} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
+    {notGuess && !quit && !guessBox && 
+    <InfoBar score={score} county={'?'} town={'?'} latitude={'?'} longitude={'?'} />}
     
       {quit && <CountyCheck
         checkQuit={quit}

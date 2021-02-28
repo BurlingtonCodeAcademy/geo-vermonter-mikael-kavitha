@@ -16,7 +16,7 @@ function Counties(props) {
   //let data
   const [buttonToggle, setToggle] = useState(true);
 const[score,setScore] = useState(props.score);
-
+let score1
   console.log('fetchO ' + countyCompare)
 
   // Function
@@ -43,7 +43,7 @@ const[score,setScore] = useState(props.score);
       if (countySelected !== countyCompare) { 
         
       setScore(score-10)
-     setToggle(false)
+     //setToggle(false)
         alert('Guess Wrong') }
       else {
         setToggle(false)
@@ -74,6 +74,7 @@ function RealCountyFetch(){
       //return true;
   }
 console.log(score)
+score1=score
   return (
 
     <>
