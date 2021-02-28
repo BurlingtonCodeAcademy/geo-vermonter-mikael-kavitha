@@ -16,7 +16,7 @@ import leafletPip from "leaflet-pip";
 import L from "leaflet";
 import CountyCheck from "./components/scripts/VtCountyBorder";
 import DirectionButtons from "./components/scripts/DirectionButtons";
-import NavBar from './components/scripts/NavBar'
+import NavBar from "./components/scripts/NavBar";
 
 function App() {
   //Variables for altering positon of map marker
@@ -160,24 +160,23 @@ function App() {
         />
       )}
 
-     
       <div className="MapInfoBarWrap">
-      <div className="directionButtons">
-        {/* Directional buttons for moving marker N, S, E, W */}
-        <DirectionButtons
-          buttonState={buttonState}
-          moveNorth={moveNorth}
-          moveSouth={moveSouth}
-          moveEast={moveEast}
-          moveWest={moveWest}
-          returnToStart={returnToStart}
-          movePath={movePath}
-          setMovePath={setMovePath}
-        />
-      </div>
-       {/* Map from the starter project provided by git repository */}
+        <div className="directionButtons">
+          {/* Directional buttons for moving marker N, S, E, W */}
+          <DirectionButtons
+            buttonState={buttonState}
+            moveNorth={moveNorth}
+            moveSouth={moveSouth}
+            moveEast={moveEast}
+            moveWest={moveWest}
+            returnToStart={returnToStart}
+            movePath={movePath}
+            setMovePath={setMovePath}
+          />
+        </div>
+        {/* Map from the starter project provided by git repository */}
         <Map center={center} zoom={zoom} />
-       
+
         {/* guessBox modal */}
         {guessBox && (
           <Counties
@@ -187,7 +186,7 @@ function App() {
             longRandom={longRandom}
           />
         )}
-         {/* InforBar that displays score, county, town, lat long */}
+        {/* InforBar that displays score, county, town, lat long */}
         {!quit && !guessBox && (
           <InfoBar
             score={score}
@@ -198,14 +197,14 @@ function App() {
           />
         )}
       </div>
-      <div className ="gameButtonWrap">
-      {/* Game buttons, start, quit, guess */}
-      <GameButtons
-        startClickHandler={startClickHandler}
-        buttonState={buttonState}
-        quitClickHandler={quitClickHandler}
-        guessClickHandler={guessClickHandler}
-      />
+      <div className="gameButtonWrap">
+        {/* Game buttons, start, quit, guess */}
+        <GameButtons
+          startClickHandler={startClickHandler}
+          buttonState={buttonState}
+          quitClickHandler={quitClickHandler}
+          guessClickHandler={guessClickHandler}
+        />
       </div>
     </div>
   );
