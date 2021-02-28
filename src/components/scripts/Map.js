@@ -16,6 +16,7 @@ function Map(props) {
       touchZoom={false}
       style={{ height: "600px", width: "600px" }}
     >
+      {/* added to allow the map to zoom in */}
       <MapZoom center={props.center} zoom={props.zoom} />
       <TileLayer
         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import InfoBar from './InfoBar'
+//finds the town, and county based on the lat and long in which the marker is currently placed
 function CountyCheck(props) {
   const [data, setData] = useState();
- 
+ //fetches the data from nominatim based upon the marker's lat and long
   useEffect(() => {
     if (data) {
       return false;
@@ -25,10 +26,10 @@ function CountyCheck(props) {
       }
     }
   });
-  //City: {data && data.address.city} Village: {data && data.address.village} 
-  //Hamlet: {data && data.address.hamlet} 
+  
   return (
-    <InfoBar
+    //InfoBar is updated based upon data fetched from nomination 
+    <InfoBar 
     score = {props.score}
     county={data && data.address.county}
     town = {data && data.address.city || data && data.address.village || data && data.address.hamlet || data && data.address.town} 
@@ -37,9 +38,3 @@ function CountyCheck(props) {
   );
 }
 export default CountyCheck;
-/*<div>
-      <div>County: {data && data.address.county}</div>
-      <div>Town: {data && data.address.city} {data && data.address.village} {data && data.address.hamlet} {data && data.address.town} </div>
-      <div>Latitude: {data && data.lat} </div>
-      <div>Longitude: {data && data.lon}</div>
-      </div>*/

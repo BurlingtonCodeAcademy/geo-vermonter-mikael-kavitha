@@ -1,39 +1,51 @@
-/*.App {
-  text-align: center;
+/* style for the body, essentially just alters the background color */
+body {
+  background-color: green;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* styling for the Application itself, aligns the content to the center */
+.App {
   display: flex;
   flex-direction: column;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 25px;
+
 }
 
-.App-link {
-  color: #61dafb;
+/* Aligns the map, info-bar and guess modal in a row */
+.MapInfoBarWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Info-bar styling */
+.InfoBar {
+  background-color: grey;
+  height: 20vh;
+  margin-left: 10px;
+}
+/* styling for the direction buttons */
+.directionButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 25vh;
+  margin-right: 10px;
+}
+/* Wrapper for the game buttons */
+.gameButtonWrap{
+margin-top: 15px;
+  margin-bottom: 30px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* style for the buttons */
+.buttonStyle{
+  background-color: Grey;
+  padding: 7px;
+
 }
-*/

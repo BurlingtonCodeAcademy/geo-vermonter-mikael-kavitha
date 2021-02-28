@@ -8,11 +8,13 @@ function DirectionButtons({moveNorth, moveSouth, moveEast, moveWest, returnToSta
 
 return(
     <>
-    <button onClick={moveNorth} disabled={!buttonState}>North</button>
-    <button onClick={moveSouth} disabled={!buttonState}>South</button>
-    <button onClick={moveEast} disabled={!buttonState}>East</button>
-    <button onClick={moveWest} disabled={!buttonState}>West</button>
-    <button onClick={returnToStart} disabled={!buttonState}>Return</button>
+{/* as these buttons are clicked the marker moves N, S, E, W accordingly */}
+    <button className="buttonStyle" onClick={moveNorth} disabled={!buttonState}>North</button>
+    <button className="buttonStyle" onClick={moveSouth} disabled={!buttonState}>South</button>
+    <button className="buttonStyle" onClick={moveEast} disabled={!buttonState}>East</button>
+    <button className="buttonStyle" onClick={moveWest} disabled={!buttonState}>West</button>
+    <button className="buttonStyle" onClick={returnToStart} disabled={!buttonState}>Return</button>
+
     </>
 )
 
