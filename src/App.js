@@ -92,6 +92,8 @@ function App() {
 
   //function that returns player to the initial random spot
   function returnToStart() {
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002)
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,)
     setCenter([
       latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002,
       longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,
@@ -106,7 +108,7 @@ function App() {
   function moveNorth() {
     setMoveNorthCount(moveNorthCount + 1);
     setLatRandom(latRandom + 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom + 0.002, longRandom]);
     setScore(score - 1);
   }
 
@@ -114,7 +116,7 @@ function App() {
   function moveSouth() {
     setMoveSouthCount(moveSouthCount + 1);
     setLatRandom(latRandom - 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom - 0.002, longRandom]);
     setScore(score - 1);
   }
 
@@ -122,7 +124,7 @@ function App() {
   function moveEast() {
     setMoveEastCount(moveEastCount + 1);
     setLongRandom(longRandom + 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom, longRandom + 0.002]);
     setScore(score - 1);
   }
 
@@ -130,7 +132,7 @@ function App() {
   function moveWest() {
     setMoveWestCount(moveWestCount + 1);
     setLongRandom(longRandom - 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom, longRandom - 0.002]);
     setScore(score - 1);
   }
 
