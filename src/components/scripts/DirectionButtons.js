@@ -1,28 +1,63 @@
 
 
-import { useState } from "react";
-// buttons that helps player to move in different directions
 
-function DirectionButtons(props){
-    const[center, setCenter]=useState([43.88, -72.7317]);
-    const[score,setScore]=useState([100])
-let moveLat=props.latRandom
-let moveLong=props.longRandom
-    function moveNorth() {
-        setCenter([moveLat + 0.002, moveLong]);
-        console.log(props.move)
-        setScore(props.score - 1);
-    }
+//--Buttons that helps player to move in different directions--//
 
-return(
+function DirectionButtons({
+  moveNorth,
+  moveSouth,
+  moveEast,
+  moveWest,
+  returnToStart,
+  buttonState,
+}) {
+  return (
     <>
-    <button id ='move-north' onClick={moveNorth}alt='up-arrow'>North</button>
-    
+
+      {/* as these buttons are clicked the marker moves N, S, E, W accordingly */}
+      {/* North Button */}
+      <button
+        className="buttonStyle"
+        onClick={moveNorth}
+        disabled={!buttonState}
+      >
+        North
+      </button>
+      {/* South Button */}
+      <button
+        className="buttonStyle"
+        onClick={moveSouth}
+        disabled={!buttonState}
+      >
+        South
+      </button>
+      {/* East Button */}
+      <button
+        className="buttonStyle"
+        onClick={moveEast}
+        disabled={!buttonState}
+      >
+        East
+      </button>
+      {/* West Button */}
+      <button
+        className="buttonStyle"
+        onClick={moveWest}
+        disabled={!buttonState}
+      >
+        West
+      </button>
+      {/* Return to intial random point button */}
+      <button
+        className="buttonStyle"
+        onClick={returnToStart}
+        disabled={!buttonState}
+      >
+        Return
+      </button>
+
     </>
-)
-
-
-
+  );
 }
 
-export default DirectionButtons
+export default DirectionButtons;

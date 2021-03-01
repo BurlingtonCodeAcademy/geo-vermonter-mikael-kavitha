@@ -1,11 +1,19 @@
-import { MapContainer, TileLayer, Polygon, Marker, Polyline } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Polygon,
+  Marker,
+  Polyline,
+} from "react-leaflet";
 import borderData from "./border";
-import MapZoom from './Zoom'
-
-
+import MapZoom from "./MapZoom";
+//---Map Functionality---//
+// Map border details with latitude and longitude defines the border points for state of VT
 function Map(props) {
-  let vtOutline = borderData.geometry.coordinates[0].map(coords => [coords[1], coords[0]])
-  console.log(props.zoom);
+  let vtOutline = borderData.geometry.coordinates[0].map((coords) => [
+    coords[1],
+    coords[0],
+  ]);
   return (
     <MapContainer
       center={props.center}
@@ -16,6 +24,7 @@ function Map(props) {
       touchZoom={false}
       style={{ height: "600px", width: "600px" }}
     >
+      {/* added to allow the map to zoom in */}
       <MapZoom center={props.center} zoom={props.zoom} />
       <TileLayer
         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
@@ -28,11 +37,7 @@ function Map(props) {
         zoom={props.zoom}
       />
     </MapContainer>
-
-
-
   );
-
 }
 
 export default Map;

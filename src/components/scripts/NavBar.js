@@ -1,17 +1,11 @@
-function NavBar(){
+//Nav Bar is not really doing anything at the moment....but it does provide a header.
 
-    return(
-        <div>
-            <h1><b>Geo Vermonter</b></h1>
-            <div>About:
-                <p>Explain about the game,how to play  and the buttons
-                </p>
-            </div>
-            <div>
-                High Score
-            </div>
-        </div>
-    )
+function NavBar() {
+  return (
+    <div class="game-info">
+      <h1>Geo-Vermonter</h1>
+    </div>
+  );
 }
 
-export default NavBar
+export default NavBar;
