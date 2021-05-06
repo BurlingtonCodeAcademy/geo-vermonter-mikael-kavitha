@@ -120,13 +120,8 @@ function App() {
   }
   //function that returns player to the initial random spot
   function returnToStart() {
-<<<<<<< HEAD
     setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
     setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
-=======
-    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002)
-    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,)
->>>>>>> 5ed1681b07c870c24287ac8db6b900f3c46254d6
     setCenter([
       latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002,
       longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,
@@ -146,10 +141,7 @@ function App() {
     setMoveNorthCount(moveNorthCount + 1);
     setLatRandom(latRandom + 0.002);
     setCenter([latRandom + 0.002, longRandom]);
-<<<<<<< HEAD
     updateArray([latRandom + 0.002, longRandom]);
-=======
->>>>>>> 5ed1681b07c870c24287ac8db6b900f3c46254d6
     setScore(score - 1);
   }
 
@@ -158,10 +150,7 @@ function App() {
     setMoveSouthCount(moveSouthCount + 1);
     setLatRandom(latRandom - 0.002);
     setCenter([latRandom - 0.002, longRandom]);
-<<<<<<< HEAD
     updateArray([latRandom - 0.002, longRandom]);
-=======
->>>>>>> 5ed1681b07c870c24287ac8db6b900f3c46254d6
     setScore(score - 1);
   }
 
@@ -170,10 +159,7 @@ function App() {
     setMoveEastCount(moveEastCount + 1);
     setLongRandom(longRandom + 0.002);
     setCenter([latRandom, longRandom + 0.002]);
-<<<<<<< HEAD
     updateArray([latRandom, longRandom + 0.002]);
-=======
->>>>>>> 5ed1681b07c870c24287ac8db6b900f3c46254d6
     setScore(score - 1);
   }
 
@@ -182,10 +168,7 @@ function App() {
     setMoveWestCount(moveWestCount + 1);
     setLongRandom(longRandom - 0.002);
     setCenter([latRandom, longRandom - 0.002]);
-<<<<<<< HEAD
     updateArray([latRandom, longRandom - 0.002]);
-=======
->>>>>>> 5ed1681b07c870c24287ac8db6b900f3c46254d6
     setScore(score - 1);
   }
   //JSX html
