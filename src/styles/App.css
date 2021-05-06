@@ -1,73 +1,301 @@
 /*--style for the body, essentially just alters the background color--*/
 body {
-  background-color: cadetblue;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
   font-family: "Permanent Marker", cursive;
+  /*background: #fff url('../images/VermontMap.jpg') 0px 0px no-repeat;*/
+ 
+    background-position: center;
+   
 }
 
-/*---styling for the Application itself, aligns the content to the center---*/
-.App {
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/*-------------------- Info Box ------------------*/
+#info-wrapper {
+  width: 20vw;
+  height: 50vh;
+  text-align: center;
+  margin-top: -40%;
+}
+
+#info {
+  background-color: #ce7845;
+  color: white;
+  text-align: center;
+  width: 15vw;
+  margin-left: 10%;
+}
+#info:hover {
+  background-color: #753a44c7;
+}
+/*-------------------- Map --------------------*/
+#MapInfoBarWrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100vw;
+  position: relative;
+}
+/*-------------------- Movement Buttons --------------------*/
+/* attribution: <div>Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
+#navigation-container {
+  width: 20vw;
+  height: 50vh;
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-items: center;
-  text-align: center;
-  align-items: center;
-  font-size: 25px;
+  margin-top: -40%;
 }
 
-/*---Aligns the map, info-bar and guess modal in a row---*/
-.MapInfoBarWrap {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+#navigation {
+  text-align: center;
+  background-color: #ce7845;
+  color: white;
+  width: 17vw;
+  margin-left: 10%;
 }
-/*--Info-bar styling--*/
-.InfoBar {
-  background-color: grey;
-  height: 35vh;
-  width: 30vw;
-  margin-left: 10px;
+#navigation:hover {
+  background-color: #753a44c7;
 }
-/*--styling for the direction buttons--*/
-.directionButtons {
+#movement-buttons {
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 35vh;
-  margin-right: 10px;
-  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+  color:#753a44c7 ;
 }
-/*--Wrapper for the game button--*/
+.move-button  {
+  
+  cursor: pointer;
+}
 
-.gameButtonWrap {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  margin-right: 350px;
+#return:hover {
+  background-color: #753a44c7;
 }
-.gameButton {
-  height: 5vh;
-  text-align: center;
-  background-color: grey;
-  padding: 7px;
-  display: inline-block;
-  width: 130px;
-  margin-left: 15px;
-}
-/*--style for the buttons-- */
 
-.buttonStyle {
+#return {
+  height: 60px;
+  width: 70px;
+  border-radius: 10px;
+  background-color: #5c2932;
+  color: white;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   display: flex;
-  background-color: Grey;
-  margin-top: 10px;
+}
+
+#north {
+  height: 60px;
+  width: 60px;  
+}
+
+#south {
+  height: 60px;
+  width: 60px; 
+}
+
+#east {
+  height: 60px;
+  width: 60px;
+}
+
+#west {
+  height: 60px;
+  width: 60px;
+}
+
+
+/*-------------------- Header --------------------*/
+#header {
+  /*background-color: rgb(64, 69, 39);*/
+  color:black;
+  text-align: center;
   padding: 10px;
-  flex-direction: column;
-  margin-right: 10px;
 }
 
-/*---game-info---*/
-.game-info {
+#titleDiv{
+  margin: 0;
+  padding: 10px 0px;
+  background-color: #ce7845;
+  color: white;
+}
+
+#nav {
+  font-size: 20px;
+  margin: 0;
+  padding: 10px 0px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+li {
+  width: 300px;
+}
+
+
+/*----------------- Instructions ------------------------*/
+#instruction-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+}
+
+#instructions {
+  cursor: pointer;
+}
+
+#instructions:hover {
+  color: black;
+}
+
+.instruction-modal {
+  width: 30vw;
+  height: 100%;
+  background-color: #c9b1a5ef;
+  border-radius: 5px;
   text-align: center;
-  margin-right: 170px;
-  padding-top: -50px;
+  font-size: 1em;
+  z-index: 2;
+}
+
+.instruction-modal h3 {
+  margin: 5px 20px;
+}
+
+.instruction-modal p {
+  margin: 0px 20px;
+}
+
+.instruction-modal button {
+  margin: 30px;
+  width: 10vw;
+  height: 3.2vh;
+  background-color: #5c2932;
+  color: white;
+  border-radius: 5px;
+}
+
+.instruction-modal button:hover {
+  background-color: #753a44c7;
+  color: black;
+  cursor: pointer;
+}
+/*----------------- Game Play Buttons ------------------------*/
+#button-container {
+  display: flex-column;
+  justify-content: center;
+  align-content: center;
+}
+
+#button-container button {
+  background-color: rgb(64, 69, 39);
+  color: white;
+  font-size: 12px;
+  border-radius: 5px;
+  height: 6vh;
+  width: 8vw;
+  margin: 20px;
+}
+
+#button-container button:hover {
+  color: black;
+  background-color: rgba(127, 131, 106, 0.897);
+  cursor: pointer;
+}
+/*----------Guess Modal---------------*/
+#guess-modal{
+  height: "100px";
+  width: "300px";
+  border: "1px solid black";
+  background-color: "gray";
+  position: "absolute";
+  float: "left";
+  margin-left: 69;
+  z-index: 500;
+}
+
+/*----------High Score Modal---------------*/
+#highScore-wrapper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+}
+#high-score-modal {
+  width: 30vw;
+  height: 30vh;
+  background-color: #c9b1a5ef;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1em;
+  z-index: 2;
+}
+
+#high-scores:hover {
+  cursor: pointer;
+  color: black;
+}
+/*----------------Player Name Modal----------------*/
+#playerName-wrapper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+}
+
+#player-name-modal {
+  width: 30vw;
+  height: 30vh;
+  background-color: #b37455ef;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1em;
+  z-index: 2;
+}
+
+#player-name-modal > h1 {
+  padding-bottom: 0;
+}
+#player-name-modal > h2 {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+#name-input {
+  border-radius: 1px;
+  height: 2.5vh;
+}
+#name-input:hover {
+  border: 1px solid #5c2932;
+}
+
+#play-again {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  width: 8vw;
+  height: 3.3vh;
+  background-color: #5c2932;
+  border-style: none;
+  color: white;
+}
+#play-again:hover {
+  background-color: #753a44c7;
+  cursor: pointer;
+  color: black;
 }

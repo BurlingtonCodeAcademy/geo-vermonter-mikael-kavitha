@@ -1,11 +1,22 @@
-//Nav Bar is not really doing anything at the moment....but it does provide a header.
+import React from "react";
 
-function NavBar() {
+function NavBar(props) {
+  //toggles to visibility of the instruction modal to visible
+  function showInstructions() {
+    props.setViewInstructions("visible");
+  }
+
+  //nav bar containing about, high scores, and score board
   return (
-    <div class="game-info">
-      <h1>Geo-Vermonter</h1>
-    </div>
+    <ul id="nav">
+      <li id="instructions" onClick={showInstructions}>
+        Instructions
+      </li>
+      <li id="high-scores">High Scores: <b>{props.highScore}</b></li>
+      <li id="score">
+        Score: <b>{props.score}</b>
+      </li>
+    </ul>
   );
 }
-
 export default NavBar;

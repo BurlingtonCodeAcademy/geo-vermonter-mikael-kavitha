@@ -8,10 +8,11 @@ function GameButtons({
   buttonState,
 }) {
   return (
-    <div>
+    <div id="button-container">
       {/* when pressed start button is disabled, quit and guess are enabled */}
-      <button
-        className="gameButton"
+      <button 
+      
+        className="index-buttons"
         onClick={startClickHandler}
         disabled={buttonState}
       >
@@ -19,7 +20,7 @@ function GameButtons({
       </button>
       {/* when pressed the guessBox modal appears */}
       <button
-        className="gameButton"
+        className="index-buttons"
         onClick={guessClickHandler}
         disabled={!buttonState}
       >
@@ -27,7 +28,7 @@ function GameButtons({
       </button>
       {/* when pressed the InfoBar displays the marker's town, county, lat, long, */}
       <button
-        className="gameButton"
+        className="index-buttons"
         onClick={quitClickHandler}
         disabled={!buttonState}
       >

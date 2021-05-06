@@ -1,7 +1,8 @@
 //Function used to update info bar, displays score, county, town, long, lat
 function InfoBar(props) {
   return (
-    <div className="InfoBar">
+    <div id="info-wrapper">
+       <h2 id="info">Information</h2>
       <div>Score:{props.score} </div>
       <div>County: {props.county} </div>
       <div>
@@ -10,6 +11,7 @@ function InfoBar(props) {
       <div>Latitude: {props.latitude} </div>
       <div>Longitude: {props.longitude} </div>
     </div>
+    
   );
 }
 

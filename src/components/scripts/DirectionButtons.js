@@ -12,51 +12,63 @@ function DirectionButtons({
   buttonState,
 }) {
   return (
-    <>
-
+    <div id="navigation-container">
+      <h2 id="navigation">Navigation</h2>
       {/* as these buttons are clicked the marker moves N, S, E, W accordingly */}
       {/* North Button */}
-      <button
-        className="buttonStyle"
-        onClick={moveNorth}
-        disabled={!buttonState}
-      >
-        North
+      <div id="movement-buttons">
+        <button
+          id="north"
+          className="move-button"
+          onClick={moveNorth}
+          disabled={!buttonState}
+          alt="up-arrow"
+        >
+          North
       </button>
-      {/* South Button */}
-      <button
-        className="buttonStyle"
-        onClick={moveSouth}
-        disabled={!buttonState}
-      >
-        South
+        {/* South Button */}
+        <button
+          id="south"
+          className="move-button"
+          onClick={moveSouth}
+          disabled={!buttonState}
+          alt="down-arrow"
+        >
+          South
       </button>
-      {/* East Button */}
-      <button
-        className="buttonStyle"
-        onClick={moveEast}
-        disabled={!buttonState}
-      >
-        East
+        {/* East Button */}
+        <button
+          id="east"
+          className="move-button"
+          onClick={moveEast}
+          disabled={!buttonState}
+          alt="right-arrow"
+        >
+          East
       </button>
-      {/* West Button */}
-      <button
-        className="buttonStyle"
-        onClick={moveWest}
-        disabled={!buttonState}
-      >
-        West
+        {/* West Button */}
+        <button
+          id="west"
+          className="move-button"
+          onClick={moveWest}
+          disabled={!buttonState}
+          alt="left-arrow"
+        >
+          West
       </button>
-      {/* Return to intial random point button */}
-      <button
-        className="buttonStyle"
-        onClick={returnToStart}
-        disabled={!buttonState}
-      >
-        Return
+        {/* Return to initial random point button */}
+        <button
+        id="return"
+          className="move-button"
+          onClick={returnToStart}
+          disabled={!buttonState}
+          
+        >
+          Return
       </button>
 
-    </>
+      </div>
+    </div>
   );
 }
 

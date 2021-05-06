@@ -9,11 +9,15 @@ import L from "leaflet";
 import GameButtons from "./components/scripts/GameButtons";
 import Map from "./components/scripts/Map";
 import Counties from "./components/scripts/Counties";
-import borderData from "./components/scripts/border";
+import borderData from "./components/scripts/Border";
 import InfoBar from "./components/scripts/InfoBar";
 import CountyCheck from "./components/scripts/VtCountyBorder";
 import DirectionButtons from "./components/scripts/DirectionButtons";
-import NavBar from "./components/scripts/NavBar";
+import Instructions from "./components/scripts/Instructions";
+//import NavBar from "./components/scripts/NavBar";
+import Header from "./components/scripts/Header";
+import PlayerName from "./components/scripts/PlayerName";
+import HighScore from "./components/scripts/HighScore";
 
 function App() {
   //Variables for altering position of map marker
@@ -24,10 +28,21 @@ function App() {
   const [latRandom, setLatRandom] = useState(43.88);
   const [longRandom, setLongRandom] = useState(-72.7317);
 
+  //Nav Bar State// 
+  //declare variable to show instructions modal
+  const [viewInstructions, setViewInstructions] = useState("hidden");
+  //High Score state that will save session scores for user
+  const [highScore, setHighScore] = useState("");
+  //declare state to view highScore modal
+  const [viewHighScore, setViewHighScore] = useState("hidden");
   //General game variables, start, quit and score
   const [score, setScore] = useState(100);
   const [start, setStart] = useState(true);
   const [quit, setQuit] = useState(false);
+
+  //Name Modal State//
+  //collects users name to associate high score with
+  const [playerNameDisplay, setPlayerNameDisplay] = useState("hidden");
 
   //Button State enables game and directional buttons after start button has been click
   const [buttonState, setButtonState] = useState(false);
@@ -38,6 +53,9 @@ function App() {
   const [moveSouthCount, setMoveSouthCount] = useState(0);
   const [moveEastCount, setMoveEastCount] = useState(0);
   const [moveWestCount, setMoveWestCount] = useState(0);
+
+  //declares an array to keep track of users movement from the start point (randomSpot)
+  const [pathArray, setPathArray] = useState({ coordinates: [[]] })
 
   //Random start function places marker in a random location within VT state borders
   function RandomStart() {
@@ -80,19 +98,35 @@ function App() {
 
   //triggers the guess modal box to appear
   function guessClickHandler() {
-    setGuessBox(!guessBox);
+    setGuessBox(!guessBox)
+
   }
 
   //Displays the players location and informs them of the county and town the marker has been placed in
   function quitClickHandler() {
-    setButtonState(!buttonState)
-
+    setButtonState(!buttonState);
+    setTimeout(function reset() {
+      //a little quitting pun to entice the user to play again
+      alert("Why did the bus driver quit his job?\n\n it was driving crazy!");
+      //refreshes page to restart the game after player quits
+      window.location.reload();
+    }, 1200)
     setQuit(true);
   }
-
+  function updateArray(newLong, newLat) {
+    let tempArr = pathArray.coordinates[0];
+    tempArr.push([newLong, newLat]);
+    setPathArray({ coordinates: [tempArr] });
+  }
   //function that returns player to the initial random spot
   function returnToStart() {
+    setLatRandom(latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002);
+    setLongRandom(longRandom + moveWestCount * 0.002 - moveEastCount * 0.002);
     setCenter([
+      latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002,
+      longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,
+    ]);
+    updateArray([
       latRandom + moveSouthCount * 0.002 - moveNorthCount * 0.002,
       longRandom + moveWestCount * 0.002 - moveEastCount * 0.002,
     ]);
@@ -106,7 +140,8 @@ function App() {
   function moveNorth() {
     setMoveNorthCount(moveNorthCount + 1);
     setLatRandom(latRandom + 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom + 0.002, longRandom]);
+    updateArray([latRandom + 0.002, longRandom]);
     setScore(score - 1);
   }
 
@@ -114,7 +149,8 @@ function App() {
   function moveSouth() {
     setMoveSouthCount(moveSouthCount + 1);
     setLatRandom(latRandom - 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom - 0.002, longRandom]);
+    updateArray([latRandom - 0.002, longRandom]);
     setScore(score - 1);
   }
 
@@ -122,7 +158,8 @@ function App() {
   function moveEast() {
     setMoveEastCount(moveEastCount + 1);
     setLongRandom(longRandom + 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom, longRandom + 0.002]);
+    updateArray([latRandom, longRandom + 0.002]);
     setScore(score - 1);
   }
 
@@ -130,21 +167,37 @@ function App() {
   function moveWest() {
     setMoveWestCount(moveWestCount + 1);
     setLongRandom(longRandom - 0.002);
-    setCenter([latRandom, longRandom]);
+    setCenter([latRandom, longRandom - 0.002]);
+    updateArray([latRandom, longRandom - 0.002]);
     setScore(score - 1);
   }
-
   //JSX html
   return (
+
     //App div for CSS styling
-    <div className="App">
-      {/* NavBar, just displaying the header at the moment */}
-      <NavBar />
+    <div id="map-container">
+      <div className="board-containers">
+        {/* NavBar, just displaying the header at the moment */}
+        <Header score={score} setViewInstructions={setViewInstructions} />
+       
 
-
-
-      <div className="MapInfoBarWrap">
-        <div className="directionButtons">
+        <Instructions
+          viewInstructions={viewInstructions}
+          setViewInstructions={setViewInstructions}
+        />
+        <HighScore
+          viewHighScore={viewHighScore}
+          setViewHighScore={setViewHighScore}
+        />
+        
+        <PlayerName
+          setPlayerNameDisplay={setPlayerNameDisplay}
+          playerNameDisplay={playerNameDisplay}
+        />
+      </div>
+     
+      <div id="MapInfoBarWrap">
+        <div className="board-containers">
           {/* Directional buttons for moving marker N, S, E, W */}
           <DirectionButtons
             buttonState={buttonState}
@@ -155,51 +208,67 @@ function App() {
             returnToStart={returnToStart}
           />
         </div>
-
-        {/* declared to obtain map center and zoom*/}
-        <Map center={center} zoom={zoom} />
-
-        {/* guessBox modal */}
-        {guessBox && (
-          <Counties
-            score={score}
-            guessBox={setGuessBox}
-            latRandom={latRandom}
-            longRandom={longRandom}
+        
+          {/* Game buttons, start, quit, guess */}
+          <GameButtons
+            startClickHandler={startClickHandler}
+            buttonState={buttonState}
+            quitClickHandler={quitClickHandler}
+            guessClickHandler={guessClickHandler}
           />
-        )}
-        {/* function for fetching geographic data from nominatim */}
-        {quit && (
-          <CountyCheck
-            score={score}
-            checkQuit={quit}
-            latRandom={latRandom}
-            longRandom={longRandom}
-          />
-        )}
+       
+        <div className="board-containers">
+          {/* declared to obtain map center and zoom*/}
+          <Map
+            center={center}
+            zoom={zoom}
+            pathArray={pathArray}
 
-        {/* Info-Bar that displays score, county, town, lat long */}
-        {!quit && !guessBox && (
-          <InfoBar
-            score={score}
-            county={"?"}
-            town={"?"}
-            latitude={"?"}
-            longitude={"?"}
           />
-        )}
+        </div>
+        <div className="button-container">
+          {/* guessBox modal */}
+          {guessBox && (
+            <Counties
+              score={score}
+              guessBox={setGuessBox}
+              latRandom={latRandom}
+              longRandom={longRandom}
+              setPlayerNameDisplay={setPlayerNameDisplay}
+              playerNameDisplay={playerNameDisplay}
+              highScore={highScore}
+              setHighScore={setHighScore}
+            />
+          )}
+          {/* function for fetching geographic data from nominatim */}
+          {quit && (
+            <CountyCheck
+              score={score}
+              checkQuit={quit}
+              latRandom={latRandom}
+              longRandom={longRandom}
+              setPlayerNameDisplay={setPlayerNameDisplay}
+              playerNameDisplay={playerNameDisplay}
+              highScore={highScore}
+              setHighScore={setHighScore}
+            />
+          )}
+
+          {/* Info-Bar that displays score, county, town, lat long */}
+          {!quit && !guessBox && (
+            <InfoBar
+              score={score}
+              county={"?"}
+              town={"?"}
+              latitude={"?"}
+              longitude={"?"}
+            />
+          )}
+        </div>
+
+     
       </div>
-
-      <div className="gameButtonWrap">
-        {/* Game buttons, start, quit, guess */}
-        <GameButtons
-          startClickHandler={startClickHandler}
-          buttonState={buttonState}
-          quitClickHandler={quitClickHandler}
-          guessClickHandler={guessClickHandler}
-        />
-      </div>
-    </div>
+     </div>
   );
 }
 

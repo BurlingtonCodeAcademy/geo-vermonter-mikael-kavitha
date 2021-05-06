@@ -1,6 +1,8 @@
 //import { Renderer } from "leaflet";
 import { useState } from "react";
 import InfoBar from "./InfoBar";
+//import VTCounties from "./images/VTCounties.gif"
+
 //----Function to create the modal display----//
 //This modal is an on-Click function, when guess is clicked, modal pops-up as an dialog box
 // In order to guess a county, modal is created with a list of all the counties in vermont
@@ -19,7 +21,10 @@ function Counties(props) {
   const [score, setScore] = useState(props.score);
   let cancel = false
 
-
+//function that toggles the player name modal if user guesses correctly
+function showPlayerNameModal() {
+  props.setPlayerNameDisplay("visible");
+}
   // Function for changing the counties
   function changeSelection(evt) {
     setCountySelected(evt.target.value);
@@ -56,6 +61,8 @@ function Counties(props) {
       alert("Ahhh! Choose a County");
     }
   }
+  const retrieveHighScore = localStorage.getItem("highScore");
+  console.log(`Local Stored HighScore: ${retrieveHighScore}`);
   //fetching the data of the county to compare if guess is rite or wrong
   function RealCountyFetch() {
     //fetching the data from nominatim reverse lookup API 
@@ -76,6 +83,7 @@ function Counties(props) {
   }
   return (
     <>
+   
       {/* until user guess the county , this will be shown in the info bar*/}
       {buttonToggle && (
         <InfoBar
@@ -85,6 +93,7 @@ function Counties(props) {
           latitude={"?"}
           longitude={"?"}
         />
+        
       )}
       {/* Once player guesses the county, the complete info will be fetched and displayed here*/}
       {!buttonToggle && (
@@ -93,6 +102,7 @@ function Counties(props) {
           county={countyCompare}
           latitude={props.latRandom}
           longitude={props.longRandom}
+        
           // county={data && data.address.county}
           town={
             (data && data.address.city) ||
@@ -100,38 +110,49 @@ function Counties(props) {
             (data && data.address.hamlet) ||
             (data && data.address.town)
           }
-        />
+          
+        />,
+      
+       
+       showPlayerNameModal() ,
+        //updates high score state using the current score
+      props.setHighScore(props.score),
+        //stores high score in local storage
+        localStorage.setItem("highScore", props.highScore)
       )}
+      
       {cancel && (
         <InfoBar
           score={score}
           county={countyCompare}
           latitude={props.latRandom}
           longitude={props.longRandom}
+       
           // county={data && data.address.county}
           town={
             (data && data.address.city) ||
             (data && data.address.village) ||
             (data && data.address.hamlet) ||
             (data && data.address.town)
+            
           }
-        />
+          
+        />,
+        
+        showPlayerNameModal() ,
+        //updates high score state using the current score
+      props.setHighScore(props.score),
+        //stores high score in local storage
+        localStorage.setItem("highScore", props.highScore)
       )}
+          
+          
 
-      <div
-        style={{
-          height: "100px",
-          width: "300px",
-          border: "1px solid black",
-          backgroundColor: "gray",
-          position: "absolute",
-          float: "left",
-          marginLeft: 69,
-          zIndex: 500,
-        }}
-      >
+      <div id="guess-model">
+      
         <div>
           <h5>
+      
             {chosen
               ? `Hello,you guessed ${countySelected}`
               : `Are you ready to Guess the County ?`}
@@ -168,11 +189,13 @@ function Counties(props) {
                 cancel = true;
 
                 props.guessBox(false);
-
+               
               }}
             />
+                
           </form>
-        </div>
+       </div>
+       
       </div>
     </>
   );
