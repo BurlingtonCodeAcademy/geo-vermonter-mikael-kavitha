@@ -6,7 +6,7 @@ import {
   Polyline,
 } from "react-leaflet";
 import { useState } from "react";
-import borderData from "./Border";
+import borderData from "./border";
 import MapZoom from "./MapZoom";
 //---Map Functionality---//
 // Map border details with latitude and longitude defines the border points for state of VT

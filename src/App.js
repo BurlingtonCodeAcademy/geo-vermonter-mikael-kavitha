@@ -9,7 +9,7 @@ import L from "leaflet";
 import GameButtons from "./components/scripts/GameButtons";
 import Map from "./components/scripts/Map";
 import Counties from "./components/scripts/Counties";
-import borderData from "./components/scripts/Border";
+import borderData from "./components/scripts/border";
 import InfoBar from "./components/scripts/InfoBar";
 import CountyCheck from "./components/scripts/VtCountyBorder";
 import DirectionButtons from "./components/scripts/DirectionButtons";
